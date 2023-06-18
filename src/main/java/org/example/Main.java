@@ -22,5 +22,9 @@ public class Main {
         bookSys.addBook("great expectation");
         var searchingBooks = bookSys.getBooksByName("great expectation");
         System.out.println("searching book result: "+searchingBooks);
+
+        // borrow books for the user with id of 0
+        bookSys.borrowBooks(0,0,1);
+        System.out.println("borrowed books: "+ theUser.getBorrowedBooks());
     }
 }

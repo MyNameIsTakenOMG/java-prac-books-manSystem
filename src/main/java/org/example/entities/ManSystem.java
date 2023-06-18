@@ -1,8 +1,6 @@
 package org.example.entities;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class ManSystem {
     public List<Book> books;
@@ -44,6 +42,36 @@ public class ManSystem {
                 .filter(book->book.getName().equals(bookname))
                 .toList();
     }
+
+    // borrow books
+    public void borrowBooks(int userId, int firstBookId, int ...otherBookIds){
+        // validate userId and bookId(s) first before performing borrow operation
+        if(!users.containsKey(userId) || !(0 <=firstBookId && firstBookId < books.size()))
+            throw new IllegalArgumentException("invalid user id or book id");
+        for (int id : otherBookIds) {
+            System.out.println("book id: "+id);
+            if (!(0 <= id && id < books.size()))
+                throw new IllegalArgumentException("invalid book id");
+        }
+        // remove the duplicates of bookId(s)
+        Set<Integer> bookIdSet = new HashSet<>();
+        bookIdSet.add(firstBookId);
+        for (int bookId :
+                otherBookIds) {
+            bookIdSet.add(bookId);
+        }
+        // check if any book has been rented
+        bookIdSet.forEach(bookId->{
+            var theBook = books.get(bookId);
+            if(theBook.getRentedBy()!=-1)
+                throw new IllegalArgumentException("the book with id "+bookId +"has been rented");
+        });
+        // perform borrowing operation for the user
+        var theUser = users.get(userId);
+        bookIdSet.forEach(theUser::borrowBook);
+        System.out.println("finished borrowing books");
+    }
+
 
     public int getCurrentBookId() {
         return currentBookId;
