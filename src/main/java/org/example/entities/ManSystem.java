@@ -8,7 +8,7 @@ public class ManSystem {
     public List<Book> books;
     private int currentBookId;
 //    public List<User> users;
-    public HashMap<Integer, User> users ;
+    public HashMap<Integer, User> users;
     private int currentUserId;
 
     public ManSystem() {
@@ -28,6 +28,21 @@ public class ManSystem {
     }
     public User getUser(int userId){
         return users.get(userId);
+    }
+
+    public void addBook(String bookname){
+        int bookId = currentBookId++;
+        var newBook = new Book(bookId, bookname);
+        books.add(newBook);
+        System.out.println("the new book has been added");
+    }
+    public Book getBookById(int bookId){
+        return books.get(bookId);
+    }
+    public List<Book> getBooksByName(String bookname){
+        return books.stream()
+                .filter(book->book.getName().equals(bookname))
+                .toList();
     }
 
     public int getCurrentBookId() {

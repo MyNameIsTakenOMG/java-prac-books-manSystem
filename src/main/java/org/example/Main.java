@@ -13,5 +13,14 @@ public class Main {
         // print out the user just created
         var theUser = bookSys.getUser(bookSys.getCurrentUserId()-1);
         System.out.println("the new user: "+theUser);
+
+        // add a new book
+        bookSys.addBook("great expectation");
+        var theBook = bookSys.getBookById(bookSys.getCurrentBookId()-1);
+        System.out.println("the new book: "+theBook);
+        // add another book
+        bookSys.addBook("great expectation");
+        var searchingBooks = bookSys.getBooksByName("great expectation");
+        System.out.println("searching book result: "+searchingBooks);
     }
 }
