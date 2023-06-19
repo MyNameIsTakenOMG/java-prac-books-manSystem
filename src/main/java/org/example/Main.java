@@ -26,10 +26,7 @@ public class Main {
             User theUser;
             Book theBook;
             String bookname;
-            int userId;
             int bookId;
-            List<Integer> bookIds;
-            String continuing = "y";
             switch (option) {
                 case "u" -> {
                     // add a new user
@@ -63,59 +60,55 @@ public class Main {
                     var searchingBooks = bookSys.getBooksByName(bookname);
                     System.out.println("searching book result: " + searchingBooks);
                 }
-                case "b" -> {
+                case "b", "r" -> {
                     // borrow books
-                    System.out.println("please type user id");
-//                    userId = userInput.nextInt();
-                    userId = Integer.parseInt(userInput.nextLine());
-                    theUser = bookSys.users.get(userId);
-                    // take book id(s)
-                    bookIds = new ArrayList<>();
-                    while (continuing.equals("y")) {
-                        System.out.println("please type book id");
-//                        bookId = userInput.nextInt();
-                        bookId = Integer.parseInt(userInput.nextLine());
-                        bookIds.add(bookId);
-                        System.out.println("continue to borrow? (y/n)");
-                        continuing = userInput.nextLine();
-                    }
-                    bookSys.borrowBooks(
-                            userId,
-                            bookIds.get(0),
-                            bookIds.subList(1, bookIds.size()).toArray(new Integer[0])
-                    );
-                    System.out.println("borrowed books: " + theUser.getBorrowedBooks());
-                    System.out.println("first book borrowed by: " + bookSys.books.get(bookIds.get(0)).getRentedBy());
+                    borrowOrReturn(option,bookSys,userInput);
                 }
-                case "r" -> {
-                    // return books
-                    System.out.println("please type user id");
-//                    userId = userInput.nextInt();
-                    userId = Integer.parseInt(userInput.nextLine());
-                    theUser = bookSys.users.get(userId);
-                    // take book id(s)
-                    bookIds = new ArrayList<>();
-                    while (continuing.equals("y")) {
-                        System.out.println("please type book id");
-//                        bookId = userInput.nextInt();
-                        bookId = Integer.parseInt(userInput.nextLine());
-                        bookIds.add(bookId);
-                        System.out.println("continue to borrow? (y/n)");
-                        continuing = userInput.nextLine();
-                    }
-                    bookSys.returnBooks(
-                            userId,
-                            bookIds.get(0),
-                            bookIds.subList(1, bookIds.size()).toArray(new Integer[0])
-                    );
-                    System.out.println("borrowed books: " + theUser.getBorrowedBooks());
-                    System.out.println("first book borrowed by: " + bookSys.books.get(bookIds.get(0)).getRentedBy());
-                }
+                // return books
                 default -> {
                 }
             }
         }
         System.out.println("management system is closed");
 
+    }
+    public static void borrowOrReturn(String option, ManSystem bookSys, Scanner userInput){
+        String operation = option.equals("b")? "borrow":"return";
+        // borrow or return books
+        System.out.println("please type user id");
+//                    userId = userInput.nextInt();
+        int userId = Integer.parseInt(userInput.nextLine());
+        User theUser = bookSys.users.get(userId);
+        // take book id(s)
+        List<Integer> bookIds = generateList(userInput);
+        if(operation.equals("borrow"))
+            bookSys.borrowBooks(
+                    userId,
+                    bookIds.get(0),
+                    bookIds.subList(1, bookIds.size()).toArray(new Integer[0])
+            );
+        else
+            bookSys.returnBooks(
+                    userId,
+                    bookIds.get(0),
+                    bookIds.subList(1, bookIds.size()).toArray(new Integer[0])
+            );
+        System.out.println("borrowed books: " + theUser.getBorrowedBooks());
+        System.out.println("first book borrowed by: " + bookSys.books.get(bookIds.get(0)).getRentedBy());
+    }
+
+    public static List<Integer> generateList(Scanner input){
+        String continuing = "y";
+        List<Integer> theList = new ArrayList<>();
+        int num;
+        while (continuing.equals("y")) {
+            System.out.println("please enter a number");
+//                        bookId = userInput.nextInt();
+            num = Integer.parseInt(input.nextLine());
+            theList.add(num);
+            System.out.println("continue to? (y/n)");
+            continuing = input.nextLine();
+        }
+        return theList;
     }
 }
