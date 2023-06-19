@@ -66,13 +66,15 @@ public class Main {
                 case "b" -> {
                     // borrow books
                     System.out.println("please type user id");
-                    userId = userInput.nextInt();
+//                    userId = userInput.nextInt();
+                    userId = Integer.parseInt(userInput.nextLine());
                     theUser = bookSys.users.get(userId);
                     // take book id(s)
                     bookIds = new ArrayList<>();
                     while (continuing.equals("y")) {
                         System.out.println("please type book id");
-                        bookId = userInput.nextInt();
+//                        bookId = userInput.nextInt();
+                        bookId = Integer.parseInt(userInput.nextLine());
                         bookIds.add(bookId);
                         System.out.println("continue to borrow? (y/n)");
                         continuing = userInput.nextLine();
@@ -88,13 +90,15 @@ public class Main {
                 case "r" -> {
                     // return books
                     System.out.println("please type user id");
-                    userId = userInput.nextInt();
+//                    userId = userInput.nextInt();
+                    userId = Integer.parseInt(userInput.nextLine());
                     theUser = bookSys.users.get(userId);
                     // take book id(s)
                     bookIds = new ArrayList<>();
                     while (continuing.equals("y")) {
                         System.out.println("please type book id");
-                        bookId = userInput.nextInt();
+//                        bookId = userInput.nextInt();
+                        bookId = Integer.parseInt(userInput.nextLine());
                         bookIds.add(bookId);
                         System.out.println("continue to borrow? (y/n)");
                         continuing = userInput.nextLine();
