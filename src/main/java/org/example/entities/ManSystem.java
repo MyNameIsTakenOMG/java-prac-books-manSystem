@@ -44,7 +44,7 @@ public class ManSystem {
     }
 
     // borrow books
-    public void borrowBooks(int userId, int firstBookId, int ...otherBookIds){
+    public void borrowBooks(Integer userId, Integer firstBookId, Integer ...otherBookIds){
         // validate userId and bookId(s) first before performing borrow operation
         if(!users.containsKey(userId) || !(0 <=firstBookId && firstBookId < books.size()))
             throw new IllegalArgumentException("invalid user id or book id");
@@ -79,7 +79,7 @@ public class ManSystem {
     }
 
     // return books
-    public void returnBooks(int userId, int firstBookId, int ...otherBookIds){
+    public void returnBooks(Integer userId, Integer firstBookId, Integer ...otherBookIds){
         // validate userId and bookId(s) first before performing borrow operation
         if(!users.containsKey(userId) || !(0 <=firstBookId && firstBookId < books.size()))
             throw new IllegalArgumentException("invalid user id or book id");
