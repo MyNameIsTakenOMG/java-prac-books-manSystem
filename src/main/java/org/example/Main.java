@@ -26,5 +26,11 @@ public class Main {
         // borrow books for the user with id of 0
         bookSys.borrowBooks(0,0,1);
         System.out.println("borrowed books: "+ theUser.getBorrowedBooks());
+        System.out.println("book with id 0 rented by: "+ bookSys.books.get(0).getRentedBy());
+
+        // return books for the user with id of 0
+        bookSys.returnBooks(0,0,1);
+        System.out.println("borrowed books: "+ theUser.getBorrowedBooks());
+        System.out.println("book with id 0 rented by: "+ bookSys.books.get(0).getRentedBy());
     }
 }

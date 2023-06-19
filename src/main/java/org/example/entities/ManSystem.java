@@ -68,10 +68,50 @@ public class ManSystem {
         });
         // perform borrowing operation for the user
         var theUser = users.get(userId);
-        bookIdSet.forEach(theUser::borrowBook);
+        bookIdSet.forEach(bookId->{
+            // add the book to the user's borrowing list
+            theUser.borrowBook(bookId);
+            // set `rentedBy` of the book to user id
+            var theBook = books.get(bookId);
+            theBook.setRentedBy(userId);
+        });
         System.out.println("finished borrowing books");
     }
 
+    // return books
+    public void returnBooks(int userId, int firstBookId, int ...otherBookIds){
+        // validate userId and bookId(s) first before performing borrow operation
+        if(!users.containsKey(userId) || !(0 <=firstBookId && firstBookId < books.size()))
+            throw new IllegalArgumentException("invalid user id or book id");
+        for (int id : otherBookIds) {
+            System.out.println("book id: "+id);
+            if (!(0 <= id && id < books.size()))
+                throw new IllegalArgumentException("invalid book id");
+        }
+        // remove the duplicates of bookId(s)
+        Set<Integer> bookIdSet = new HashSet<>();
+        bookIdSet.add(firstBookId);
+        for (int bookId :
+                otherBookIds) {
+            bookIdSet.add(bookId);
+        }
+        // check if any book has been returned
+        bookIdSet.forEach(bookId->{
+            var theBook = books.get(bookId);
+            if(theBook.getRentedBy()==-1)
+                throw new IllegalArgumentException("the book with id "+bookId+" has been returned");
+        });
+        //perform returning operation for the user
+        var theUser = users.get(userId);
+        bookIdSet.forEach(bookId->{
+            // remove the book from the user's borrowing list
+            theUser.returnBook(bookId);
+            // reset the `rentedBy` of the book to -1
+            var theBook = books.get(bookId);
+            theBook.unrent();
+        });
+        System.out.println("finished returning operation");
+    }
 
     public int getCurrentBookId() {
         return currentBookId;
