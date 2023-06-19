@@ -20,6 +20,7 @@ public class Main {
 
 
         while(!option.equals("q")){
+            System.out.println("call menu... and the option: "+option);
             Menu.getMenu();
             option = userInput.nextLine();
             User theUser;
@@ -50,7 +51,8 @@ public class Main {
                 case "i" -> {
                     // get a book by id
                     System.out.println("please type book id");
-                    bookId = userInput.nextInt();
+//                    bookId = userInput.nextInt();
+                    bookId = Integer.parseInt(userInput.nextLine());
                     theBook = bookSys.books.get(bookId);
                     System.out.println("the searched book: " + theBook);
                 }
