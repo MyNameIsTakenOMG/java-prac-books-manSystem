@@ -1,10 +1,10 @@
 package org.example.entities;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class BookTest {
 
     static Book book;
@@ -17,11 +17,13 @@ class BookTest {
     }
 
     @Test
+    @Order(1)
     void getRentedBy() {
         assertEquals(-1,book.getRentedBy());
     }
 
     @Test
+    @Order(2)
     void setRentedBy() {
         int id = 1;
         book.setRentedBy(id);
@@ -29,6 +31,7 @@ class BookTest {
     }
 
     @Test
+    @Order(3)
     void unrent() {
         book.unrent();
         assertEquals(-1, book.getRentedBy());

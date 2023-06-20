@@ -1,14 +1,13 @@
 package org.example.entities;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserTest {
 
     static User user;
@@ -19,6 +18,7 @@ class UserTest {
     }
 
     @Test
+    @Order(1)
     void borrowBook() {
         //Arrange
         int bookId = 1;
@@ -29,6 +29,7 @@ class UserTest {
     }
 
     @Test
+    @Order(2)
     void returnBook() {
         // Arrange
         int bookId = 1;
