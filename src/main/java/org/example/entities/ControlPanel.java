@@ -66,7 +66,8 @@ public class ControlPanel {
     public void addUser(){
         System.out.println("please type username: ");
         String username = userInput.nextLine();
-        bookSys.addUser(username);
+        var newUser = bookSys.createUser(username);
+        bookSys.addUser(newUser);
         // print out the user just created
         User theUser = bookSys.getUser(bookSys.getCurrentUserId() - 1);
         System.out.println("the new user: " + theUser);

@@ -31,6 +31,7 @@ class UserTest {
     @Test
     @Order(2)
     void returnBook() {
+        System.out.println("borrowed books: "+user.getBorrowedBooks());
         // Arrange
         int bookId = 1;
         // Act

@@ -4,6 +4,11 @@ import java.util.*;
 
 public class ManSystem {
     public List<Book> books;
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
     private int currentBookId;
 //    public List<User> users;
     public HashMap<Integer, User> users;
@@ -17,13 +22,16 @@ public class ManSystem {
         this.currentUserId = 0;
     }
 
-    // add a new user
-    public void addUser(String username){
+    // create and add a new user
+    public User createUser(String username){
         int userId = currentUserId++;
-        var newUser = new User(userId, username);
-        users.put(userId,newUser);
+        return new User(userId, username);
+    }
+    public void addUser(User user){
+        users.put(user.getId(),user);
         System.out.println("the new user has been added");
     }
+
     public User getUser(int userId){
         return users.get(userId);
     }
@@ -112,6 +120,8 @@ public class ManSystem {
         });
         System.out.println("finished returning operation");
     }
+
+
 
     public int getCurrentBookId() {
         return currentBookId;
