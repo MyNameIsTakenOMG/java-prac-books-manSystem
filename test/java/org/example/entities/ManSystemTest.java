@@ -41,7 +41,7 @@ class ManSystemTest {
     @Order(2)
     void addUser() {
         manSystem.addUser(user);
-        assertEquals(1,manSystem.users.size());
+        assertEquals(1,manSystem.getUsers().size());
     }
 
     @Test

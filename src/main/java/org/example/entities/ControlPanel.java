@@ -52,7 +52,8 @@ public class ControlPanel {
         System.out.println("please type book id");
 //                    bookId = userInput.nextInt();
         int bookId = Integer.parseInt(userInput.nextLine());
-        Book theBook = bookSys.books.get(bookId);
+        var books = bookSys.getBooks();
+        Book theBook = books.get(bookId);
         System.out.println("the searched book: " + theBook);
     }
 
@@ -79,7 +80,7 @@ public class ControlPanel {
         System.out.println("please type user id");
 //                    userId = userInput.nextInt();
         int userId = Integer.parseInt(userInput.nextLine());
-        User theUser = bookSys.users.get(userId);
+        User theUser = bookSys.getUsers().get(userId);
         // take book id(s)
         List<Integer> bookIds = generateList();
         if(operation.equals("borrow"))
@@ -95,7 +96,7 @@ public class ControlPanel {
                     bookIds.subList(1, bookIds.size()).toArray(new Integer[0])
             );
         System.out.println("borrowed books: " + theUser.getBorrowedBooks());
-        System.out.println("first book borrowed by: " + bookSys.books.get(bookIds.get(0)).getRentedBy());
+        System.out.println("first book borrowed by: " + bookSys.getBooks().get(bookIds.get(0)).getRentedBy());
     }
 
     public List<Integer> generateList(){

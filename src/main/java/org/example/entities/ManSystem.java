@@ -3,15 +3,20 @@ package org.example.entities;
 import java.util.*;
 
 public class ManSystem {
-    public List<Book> books;
+    private List<Book> books;
 
     public List<Book> getBooks() {
         return books;
     }
 
     private int currentBookId;
-//    public List<User> users;
-    public HashMap<Integer, User> users;
+
+    public HashMap<Integer, User> getUsers() {
+        return users;
+    }
+
+    //    public List<User> users;
+    private HashMap<Integer, User> users;
     private int currentUserId;
 
     public ManSystem() {
