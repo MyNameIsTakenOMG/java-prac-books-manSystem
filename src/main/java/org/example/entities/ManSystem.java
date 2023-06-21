@@ -59,20 +59,11 @@ public class ManSystem {
     // borrow books
     public void borrowBooks(Integer userId, Integer firstBookId, Integer ...otherBookIds){
         // validate userId and bookId(s) first before performing borrow operation
-        if(!users.containsKey(userId) || !(0 <=firstBookId && firstBookId < books.size()))
-            throw new IllegalArgumentException("invalid user id or book id");
-        for (int id : otherBookIds) {
-            System.out.println("book id: "+id);
-            if (!(0 <= id && id < books.size()))
-                throw new IllegalArgumentException("invalid book id");
-        }
+        if(!users.containsKey(userId)) throw new IllegalArgumentException("invalid user id");
+        validateNum(books.size(),firstBookId,otherBookIds);
         // remove the duplicates of bookId(s)
-        Set<Integer> bookIdSet = new HashSet<>();
-        bookIdSet.add(firstBookId);
-        for (int bookId :
-                otherBookIds) {
-            bookIdSet.add(bookId);
-        }
+        Set<Integer> bookIdSet = generateSet(firstBookId,otherBookIds);
+
         // check if any book has been rented
         bookIdSet.forEach(bookId->{
             var theBook = books.get(bookId);
@@ -94,20 +85,11 @@ public class ManSystem {
     // return books
     public void returnBooks(Integer userId, Integer firstBookId, Integer ...otherBookIds){
         // validate userId and bookId(s) first before performing borrow operation
-        if(!users.containsKey(userId) || !(0 <=firstBookId && firstBookId < books.size()))
-            throw new IllegalArgumentException("invalid user id or book id");
-        for (int id : otherBookIds) {
-            System.out.println("book id: "+id);
-            if (!(0 <= id && id < books.size()))
-                throw new IllegalArgumentException("invalid book id");
-        }
+        if(!users.containsKey(userId)) throw new IllegalArgumentException("invalid user id");
+        validateNum(books.size(),firstBookId,otherBookIds);
         // remove the duplicates of bookId(s)
-        Set<Integer> bookIdSet = new HashSet<>();
-        bookIdSet.add(firstBookId);
-        for (int bookId :
-                otherBookIds) {
-            bookIdSet.add(bookId);
-        }
+        Set<Integer> bookIdSet = generateSet(firstBookId,otherBookIds);
+
         // check if any book has been returned
         bookIdSet.forEach(bookId->{
             var theBook = books.get(bookId);
@@ -126,7 +108,22 @@ public class ManSystem {
         System.out.println("finished returning operation");
     }
 
+    private Set<Integer> generateSet(Integer first,Integer ...others){
+        Set<Integer> newSet = new HashSet<>();
+        newSet.add(first);
+        newSet.addAll(Arrays.asList(others));
+        return newSet;
+    }
 
+    private void validateNum(int range, int first, Integer[] others){
+        int[] arr = new int[others.length+1];
+        arr[0] = first;
+        System.arraycopy(others,0,arr,1,others.length);
+        for (int id : others) {
+            if (!(0 <= id && id < range))
+                throw new IllegalArgumentException("invalid num");
+        }
+    }
 
     public int getCurrentBookId() {
         return currentBookId;
