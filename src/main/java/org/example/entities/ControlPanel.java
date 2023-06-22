@@ -49,12 +49,17 @@ public class ControlPanel {
         System.out.println("searching book result: " + searchingBooks);
     }
     public void getBookById(){
-        System.out.println("please type book id");
-//                    bookId = userInput.nextInt();
-        int bookId = Integer.parseInt(userInput.nextLine());
-        var books = bookSys.getBooks();
-        Book theBook = books.get(bookId);
-        System.out.println("the searched book: " + theBook);
+        try{
+            System.out.println("please type book id");
+    //                    bookId = userInput.nextInt();
+            int bookId = Integer.parseInt(userInput.nextLine());
+            var books = bookSys.getBooks();
+            Book theBook = books.get(bookId);
+            System.out.println("the searched book: " + theBook);
+        }
+        catch (IndexOutOfBoundsException e){
+            System.out.println("invalid book id"+ e.getMessage());
+        }
     }
 
     public void addBook(){

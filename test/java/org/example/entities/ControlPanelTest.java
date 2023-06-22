@@ -45,7 +45,8 @@ class ControlPanelTest {
     void getBookById() {
         when(userInputMock.nextLine()).thenReturn("0");
         when(bookSysMock.getBooks()).thenReturn(new ArrayList<>());
-        assertThrows(IndexOutOfBoundsException.class, controlPanel::getBookById);
+//        assertThrows(IndexOutOfBoundsException.class, controlPanel::getBookById);
+        assertDoesNotThrow(controlPanel::getBookById);
     }
 
     @Test
