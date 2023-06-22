@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -64,8 +66,16 @@ class ControlPanelTest {
     }
 
     @Test
-    void borrowOrReturn() {
-
+    void borrowBooks() {
+        when(userInputMock.nextLine()).thenReturn("b","0","1","n","q");
+        controlPanel.start();
+        verify(bookSysMock).borrowBooks(any(),anyInt());
+    }
+    @Test
+    void returnBooks(){
+        when(userInputMock.nextLine()).thenReturn("r","0","1","n","q");
+        controlPanel.start();
+        verify(bookSysMock).returnBooks(any(),anyInt());
     }
 
     @Test

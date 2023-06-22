@@ -63,7 +63,6 @@ public class ManSystem {
         validateNum(books.size(),firstBookId,otherBookIds);
         // remove the duplicates of bookId(s)
         Set<Integer> bookIdSet = generateSet(firstBookId,otherBookIds);
-
         // check if any book has been rented
         bookIdSet.forEach(bookId->{
             var theBook = books.get(bookId);
@@ -89,7 +88,6 @@ public class ManSystem {
         validateNum(books.size(),firstBookId,otherBookIds);
         // remove the duplicates of bookId(s)
         Set<Integer> bookIdSet = generateSet(firstBookId,otherBookIds);
-
         // check if any book has been returned
         bookIdSet.forEach(bookId->{
             var theBook = books.get(bookId);
