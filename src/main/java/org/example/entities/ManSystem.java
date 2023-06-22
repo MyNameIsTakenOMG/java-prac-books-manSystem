@@ -115,12 +115,12 @@ public class ManSystem {
         return newSet;
     }
 
-    private void validateNum(int range, int first, Integer[] others){
-        int[] arr = new int[others.length+1];
+    private void validateNum(Integer range, Integer first, Integer[] others){
+        Integer[] arr = new Integer[others.length+1];
         arr[0] = first;
         System.arraycopy(others,0,arr,1,others.length);
-        for (int id : others) {
-            if (!(0 <= id && id < range))
+        for (Integer integer : arr) {
+            if (integer < 0 || integer >= range)
                 throw new IllegalArgumentException("invalid num");
         }
     }
